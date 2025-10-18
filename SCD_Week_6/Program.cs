@@ -53,28 +53,49 @@ IList<Product> products = new List<Product>
     }
 };
 
-//Order by category and price
+//Count Products in Electronics Category
 
-Console.WriteLine("Products ordered by category")
-var orderedProducts = products
-    .OrderBy(p => p.Category)
-    .ThenByDescending(p => p.Price)
-    .Select(p => new
-    {
-        p.ProductName,
-        p.Category,
-        p.Price
-    });
+var countElectronics = products
+    .Where(p => p.Category == "Electronics").Count();
 
-foreach (var product in orderedProducts)
-{
-    //Console.WriteLine($"ID: {product.ProductId}" +
-    Console.WriteLine($"Name: {product.ProductName}" +
-     //$"Price: {product.Price}" +
-     $"Category: {product.Category}" +
-     $"Stock: {product.Price}"
-     );
-}
+var countElec = products.Count(p => p.Category == "ELectronics");
+
+Console.WriteLine($"Number of products in Electronics: {countElectronics}");
+Console.WriteLine($"Number of products in Electronics: {countElec}");
+
+decimal avgPrice = products.Average(p => p.Price);
+decimal maxPrice = products.Max(p => p.Price);
+decimal minPrice = products.Min(p => p.Price);
+
+Console.WriteLine($"Average price of all products: {avgPrice}");
+Console.WriteLine($"Maximum price of all products: {avgPrice}");
+Console.WriteLine($"Minumim price of all products: {avgPrice}");
+
+
+//*******************************************************************
+
+////Order by category and price
+
+//Console.WriteLine("Products ordered by category")
+//var orderedProducts = products
+//    .OrderBy(p => p.Category)
+//    .ThenByDescending(p => p.Price)
+//    .Select(p => new
+//    {
+//        p.ProductName,
+//        p.Category,
+//        p.Price
+//    });
+
+//foreach (var product in orderedProducts)
+//{
+//    //Console.WriteLine($"ID: {product.ProductId}" +
+//    Console.WriteLine($"Name: {product.ProductName}" +
+//     //$"Price: {product.Price}" +
+//     $"Category: {product.Category}" +
+//     $"Stock: {product.Price}"
+//     );
+//}
 
 //*************************************************************************
 
