@@ -53,31 +53,81 @@ IList<Product> products = new List<Product>
     }
 };
 
+//Order by category and price
 
-//Find all products in stock with greater than 100 items
-//and each in stock
+Console.WriteLine("Products ordered by category")
+var orderedProducts = products
+    .OrderBy(p => p.Category)
+    .ThenByDescending(p => p.Price)
+    .Select(p => new
+    {
+        p.ProductName,
+        p.Category,
+        p.Price
+    });
 
-var wellStockedProducts = products
-    .Where(p => p.Stock > 100)
-    .Select(
-        p=> new
-        {
-            p.ProductName,
-            p.Price,
-            p.Category,
-            InStock = p.Stock > 0 ? "yes" : "No"
-        }
-    );
-
-foreach (var product in wellStockedProducts)
+foreach (var product in orderedProducts)
 {
     //Console.WriteLine($"ID: {product.ProductId}" +
     Console.WriteLine($"Name: {product.ProductName}" +
      //$"Price: {product.Price}" +
      $"Category: {product.Category}" +
-     $"Stock: {product.InStock}"
+     $"Stock: {product.Price}"
      );
 }
+
+//*************************************************************************
+
+//// Order Products by category and then by Price descending
+//Console.WriteLine("Products ordered by category")
+//var orderedProducts = products
+//    .OrderBy(p => p.Category)
+//    .Select(p => new
+//    {
+//        p.ProductName,
+//        p.Category,
+//        p.Price
+//    });
+
+//foreach (var product in orderedProducts)
+//{
+//    //Console.WriteLine($"ID: {product.ProductId}" +
+//    Console.WriteLine($"Name: {product.ProductName}" +
+//     //$"Price: {product.Price}" +
+//     $"Category: {product.Category}" +
+//     $"Stock: {product.Price}"
+//     );
+//}
+
+//********************************************************************
+
+
+
+
+////Find all products in stock with greater than 100 items
+////and each in stock
+
+//var wellStockedProducts = products
+//    .Where(p => p.Stock > 100)
+//    .Select(
+//        p=> new
+//        {
+//            p.ProductName,
+//            p.Price,
+//            p.Category,
+//            InStock = p.Stock > 0 ? "yes" : "No"
+//        }
+//    );
+
+//foreach (var product in wellStockedProducts)
+//{
+//    //Console.WriteLine($"ID: {product.ProductId}" +
+//    Console.WriteLine($"Name: {product.ProductName}" +
+//     //$"Price: {product.Price}" +
+//     $"Category: {product.Category}" +
+//     $"Stock: {product.InStock}"
+//     );
+//}
 
 
 
