@@ -53,19 +53,73 @@ IList<Product> products = new List<Product>
     }
 };
 
-//Find all product price greater than 100
 
-var expensiveProducts = products.Where(p => p.Price > 100);
+//Find all products in stock with greater than 100 items
+//and each in stock
 
-foreach (var product in expensiveProducts)
+var wellStockedProducts = products
+    .Where(p => p.Stock > 100)
+    .Select(
+        p=> new
+        {
+            p.ProductName,
+            p.Price,
+            p.Category,
+            InStock = p.Stock > 0 ? "yes" : "No"
+        }
+    );
+
+foreach (var product in wellStockedProducts)
 {
-    Console.WriteLine($"ID: {product.ProductId}" +
-        $"Name: {product.ProductName}" +
-        $"Price: {product.Price}" +
-        $"Category: {product.Category}" +
-        $"Srock: {product.Stock}"
-        );
+    //Console.WriteLine($"ID: {product.ProductId}" +
+    Console.WriteLine($"Name: {product.ProductName}" +
+     //$"Price: {product.Price}" +
+     $"Category: {product.Category}" +
+     $"Stock: {product.InStock}"
+     );
 }
+
+
+
+
+//***************************************************************
+
+////Find all product price greater than 100
+
+//var expensiveProducts = products.Where(p => p.Price > 100)
+//    .Select(
+//    p=> new
+//    {
+//        p.ProductName,
+//        p.Category,
+//        p.Stock
+//    }
+//    );
+
+//foreach (var product in expensiveProducts)
+//{
+//    //Console.WriteLine($"ID: {product.ProductId}" +
+//       Console.WriteLine( $"Name: {product.ProductName}" +
+//        //$"Price: {product.Price}" +
+//        $"Category: {product.Category}" +
+//        $"Stock: {product.Stock}"
+//        );
+//}
+
+//********************************************************************
+
+//var expensiveProducts = products.Where(p => p.Price > 100);
+
+
+//foreach (var product in expensiveProducts)
+//{
+//    Console.WriteLine($"ID: {product.ProductId}" +
+//        $"Name: {product.ProductName}" +
+//        $"Price: {product.Price}" +
+//        $"Category: {product.Category}" +
+//        $"Stock: {product.Stock}"
+//        );
+//}
 
 public class Product
 {
